@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-
+import Chart from './components/Chart.jsx'
 
 class App extends React.Component{
   constructor(props) {
     super(props)
     this.state = {
       currentPrice : null,
-      currentTime : null
+      currentTime : null,
+      historicalPrices : null,
+      historicalDates : null
     }
   }
 
@@ -22,8 +24,7 @@ class App extends React.Component{
 
   getCurrentPrice() {
     axios.get('http://127.0.0.1:4517/currentPrice')
-      .then(results => {
-        this.setState({
+      .then(results => {this.setState({
         currentPrice : results.data.bpi.USD.rate,
         currentTime : results.data.time.updated
       })})
@@ -32,7 +33,14 @@ class App extends React.Component{
 
   getHistoricalPrice() {
     axios.get('http://127.0.0.1:4517/historicalPrice')
-      .then(data => console.log(data.data))
+      .then(data => {
+        let dates = Object.keys(data.data)
+        let prices = Object.values(data.data)
+        this.setState({
+        historicalPrices : prices,
+        historicalDates : dates
+      })
+    })
       .catch(err => console.log(err))
   }
 
@@ -43,6 +51,8 @@ class App extends React.Component{
       {this.state.currentPrice}
         </p>
         <p>{this.state.currentTime}</p>
+        <Chart historicalPrices={this.state.historicalPrices}
+                historicalDates ={this.state.historicalDates}/>
       </div>
     )
   }
