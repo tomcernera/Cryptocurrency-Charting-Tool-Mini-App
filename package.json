@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server/index.js",
+    "dev:react": "webpack -d --watch"
   },
   "repository": {
     "type": "git",
@@ -12,24 +13,28 @@
   },
   "author": "",
   "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "webpack": "^2.2.1"
+  },
+  "dependencies": {
+    "axios": "^0.17.1",
+    "body-parser": "^1.17.2",
+    "bootstrap": "^3.3.7",
+    "express": "^4.15.4",
+    "jquery": "^3.2.1",
+    "moment": "^2.19.2",
+    "mongoose": "^4.11.6",
+    "mysql": "^2.14.1",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "underscore": "^1.8.3"
+  },
   "bugs": {
     "url": "https://github.com/tomcernera/Cryptocurrency-Charting-Tool-Mini-App/issues"
   },
-  "homepage": "https://github.com/tomcernera/Cryptocurrency-Charting-Tool-Mini-App#readme",
-  "devDependencies": {
-    "@babel/core": "^7.5.0",
-    "@babel/preset-env": "^7.5.0",
-    "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.6",
-    "webpack": "^4.35.2",
-    "webpack-cli": "^3.3.5",
-    "webpack-dev-server": "^3.7.2"
-  },
-  "dependencies": {
-    "axios": "^0.19.0",
-    "express": "^4.17.1",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-hot-loader": "^4.12.3"
-  }
+  "homepage": "https://github.com/tomcernera/Cryptocurrency-Charting-Tool-Mini-App#readme"
 }
