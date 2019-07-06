@@ -6,12 +6,11 @@ class Chart extends React.Component {
   render() {
     return (
       <div>
-        <h2>Line Example</h2>
         <Line ref="chart" data={{
     labels: this.props.historicalDates,
     datasets: [
       {
-        label: 'My First dataset',
+        label: 'BITCOIN',
         fill: false,
         lineTension: 0.1,
         backgroundColor: 'rgba(75,192,192,0.4)',
@@ -37,10 +36,10 @@ class Chart extends React.Component {
     );
   }
 
-  componentDidMount() {
-    const { datasets } = this.refs.chart.chartInstance.data
-    console.log(datasets[0].data);
-  }
+  // componentDidMount() {
+  //   const { datasets } = this.refs.chart.chartInstance.data
+  //   console.log(datasets[0].data);
+  // }
 }
  
 
