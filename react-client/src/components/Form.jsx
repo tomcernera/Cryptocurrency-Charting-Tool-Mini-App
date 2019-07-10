@@ -4,27 +4,20 @@ class Form extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      startDate : '',
-      endDate : ''
+      stock : ''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleStartChange = this.handleStartChange.bind(this)
-    this.handleEndChange = this.handleEndChange.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
-handleStartChange(event) {
+handleChange(event) {
   this.setState({
-    startDate : event.target.value})
-}
-
-handleEndChange(event) {
-  this.setState({
-    endDate : event.target.value})
+    stock : event.target.value})
 }
 
 handleSubmit(event) {
   event.preventDefault()
-  this.props.getHistoricalPriceDateRange(this.state.startDate,this.state.endDate)
+  this.props.getHistoricalPrices(this.state.stock)
 }
 
 render() {
@@ -32,14 +25,8 @@ render() {
     <div>
   <form onSubmit={this.handleSubmit}>
   <label>
-    Start Date in YYYY-MM-DD:
-    <input type="text" value={this.state.startDate} onChange={this.handleStartChange}/>
-  </label>
-</form>
-  <form onSubmit={this.handleSubmit}>
-  <label>
-    End Date in YYYY-MM-DD:
-    <input type="text" value={this.state.endDate} onChange={this.handleEndChange}/>
+    Stock symbol:
+    <input type="text" value={this.state.stock} onChange={this.handleChange}/>
   </label>
 </form>
     </div>

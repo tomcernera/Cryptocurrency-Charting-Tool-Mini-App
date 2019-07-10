@@ -10,7 +10,7 @@ class Chart extends React.Component {
     labels: this.props.historicalDates,
     datasets: [
       {
-        label: 'BITCOIN',
+        label: this.props.stock,
         fill: false,
         lineTension: 0.1,
         backgroundColor: 'rgba(75,192,192,0.4)',

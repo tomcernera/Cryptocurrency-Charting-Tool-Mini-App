@@ -11,12 +11,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/../react-client/dist'));
 
 
-app.get('/currentPrice', (req,res)=> {
-  API.getCurrentPrice(req,res);
-})
 
-app.get('/historicalPrice', (req,res)=> {
-  API.getHistoricalPrice(req,res)
+app.get('/stockHistoricalPrices', (req,res)=>{
+  API.getHistoricalStockPrices(req,res)
 })
 
 app.listen(PORT, () => {

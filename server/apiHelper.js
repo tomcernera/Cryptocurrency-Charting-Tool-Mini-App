@@ -1,14 +1,13 @@
 const axios = require('axios')
+const api = require('../config.js').api_key
 
 module.exports = {
-  getCurrentPrice : (req,res) => {
-    axios.get('https://api.coindesk.com/v1/bpi/currentprice.json')
-      .then(results => res.send(results.data))
-      .catch(err => console.log(err))
-  },
-  getHistoricalPrice : (req,res)=> {
-    axios.get('https://api.coindesk.com/v1/bpi/historical/close.json')
-      .then(results=> res.send(results.data.bpi))
-      .catch(err => console.log(err))
+  getHistoricalStockPrices : (req,res) => {
+    axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${req.query.stock}&apikey=${api}`)
+    .then(results => res.send(results.data['Time Series (Daily)']))
+    .catch(err => console.log(err))
   }
 }
+
+
+// https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=demo 
