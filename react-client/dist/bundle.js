@@ -29885,6 +29885,10 @@ var _Form = __webpack_require__(256);
 
 var _Form2 = _interopRequireDefault(_Form);
 
+var _News = __webpack_require__(476);
+
+var _News2 = _interopRequireDefault(_News);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -29904,7 +29908,8 @@ var App = function (_React$Component) {
     _this.state = {
       currentPrice: null,
       historicalPrices: null,
-      historicalDates: null
+      historicalDates: null,
+      news: []
     };
     _this.getHistoricalPrices = _this.getHistoricalPrices.bind(_this);
     return _this;
@@ -29913,7 +29918,8 @@ var App = function (_React$Component) {
   _createClass(App, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.getHistoricalPrices('MSFT');
+      this.getHistoricalPrices('SPX');
+      this.getStockNews('SPX');
     }
   }, {
     key: 'getHistoricalPrices',
@@ -29935,15 +29941,39 @@ var App = function (_React$Component) {
       });
     }
   }, {
+    key: 'getStockNews',
+    value: function getStockNews(stock) {
+      var _this3 = this;
+
+      _axios2.default.get('http://127.0.0.1:4517/stockNews?stock=' + stock).then(function (results) {
+        console.log(results.data);
+        _this3.setState({
+          news: results.data.articles
+        });
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var _this4 = this;
+
       return _react2.default.createElement(
         'div',
         null,
+        _react2.default.createElement(
+          'button',
+          { onClick: function onClick() {
+              return _this4.getStockNews(_this4.state.stock);
+            } },
+          'NEWS'
+        ),
         _react2.default.createElement(_Form2.default, { getHistoricalPrices: this.getHistoricalPrices }),
         _react2.default.createElement(_Chart2.default, { historicalPrices: this.state.historicalPrices,
           historicalDates: this.state.historicalDates,
-          stock: this.state.stock })
+          stock: this.state.stock }),
+        _react2.default.createElement(_News2.default, { news: this.state.news })
       );
     }
   }]);
@@ -60830,6 +60860,39 @@ try {
 
 module.exports = g;
 
+
+/***/ }),
+/* 476 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(31);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var News = function News(props) {
+  return _react2.default.createElement(
+    'ul',
+    null,
+    props.news.map(function (title) {
+      return _react2.default.createElement(
+        'li',
+        { key: title.date },
+        title.title
+      );
+    })
+  );
+};
+
+exports.default = News;
 
 /***/ })
 /******/ ]);

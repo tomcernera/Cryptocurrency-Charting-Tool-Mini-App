@@ -16,6 +16,10 @@ app.get('/stockHistoricalPrices', (req,res)=>{
   API.getHistoricalStockPrices(req,res)
 })
 
+app.get('/stockNews', (req,res) => {
+  API.getNews(req,res)
+})
+
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
