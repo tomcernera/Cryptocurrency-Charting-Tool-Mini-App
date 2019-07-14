@@ -28,6 +28,7 @@ class App extends React.Component{
         let dates = Object.keys(results.data).reverse();
         let prices = Object.values(results.data).map(close=>close['4. close']).reverse();
         this.setState({
+          currentPrice : prices[prices.length - 1],
           historicalDates : dates,
           historicalPrices : prices,
           stock : stock
@@ -38,12 +39,7 @@ class App extends React.Component{
 
   getStockNews(stock) {
     axios.get(`http://127.0.0.1:4517/stockNews?stock=${stock}`)
-      .then(results => {
-        console.log(results.data)
-        this.setState({
-          news : results.data.articles
-        })
-      })
+      .then(results => {this.setState({news : results.data.articles})})
       .catch(err => console.log(err))
   }
 
@@ -51,6 +47,7 @@ class App extends React.Component{
     return (
       <div>
       <button onClick={()=>this.getStockNews(this.state.stock)}>NEWS</button>
+      <div>Current Price: {this.state.currentPrice}</div>
       <Form getHistoricalPrices={this.getHistoricalPrices}/>
       <Chart historicalPrices={this.state.historicalPrices}
                 historicalDates ={this.state.historicalDates}

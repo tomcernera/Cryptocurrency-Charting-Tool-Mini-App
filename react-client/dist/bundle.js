@@ -29970,6 +29970,7 @@ var App = function (_React$Component) {
           return close['4. close'];
         }).reverse();
         _this2.setState({
+          currentPrice: prices[prices.length - 1],
           historicalDates: dates,
           historicalPrices: prices,
           stock: stock
@@ -29984,10 +29985,7 @@ var App = function (_React$Component) {
       var _this3 = this;
 
       _axios2.default.get('http://127.0.0.1:4517/stockNews?stock=' + stock).then(function (results) {
-        console.log(results.data);
-        _this3.setState({
-          news: results.data.articles
-        });
+        _this3.setState({ news: results.data.articles });
       }).catch(function (err) {
         return console.log(err);
       });
@@ -30006,6 +30004,12 @@ var App = function (_React$Component) {
               return _this4.getStockNews(_this4.state.stock);
             } },
           'NEWS'
+        ),
+        _react2.default.createElement(
+          'div',
+          null,
+          'Current Price: ',
+          this.state.currentPrice
         ),
         _react2.default.createElement(_Form2.default, { getHistoricalPrices: this.getHistoricalPrices }),
         _react2.default.createElement(_Chart2.default, { historicalPrices: this.state.historicalPrices,
